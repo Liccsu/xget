@@ -294,7 +294,8 @@ async function handleRequest(request, env, ctx) {
     // Redirect root path or invalid platforms to GitHub repository
     if (url.pathname === '/' || url.pathname === '') {
       const HOME_PAGE_URL = 'https://detect.liccsu.com/';
-      return Response.redirect(HOME_PAGE_URL, 302);
+      const headers = new Headers();
+      return await fetch(HOME_PAGE_URL, { method: 'GET', headers });
     }
 
     const validation = validateRequest(request, url, config);
@@ -334,7 +335,8 @@ async function handleRequest(request, env, ctx) {
 
     if (!platform || !config.PLATFORMS[platform]) {
       const HOME_PAGE_URL = 'https://detect.liccsu.com/';
-      return Response.redirect(HOME_PAGE_URL, 302);
+      const headers = new Headers();
+      return await fetch(HOME_PAGE_URL, { method: 'GET', headers });
     }
 
     // Transform URL based on platform using unified logic
